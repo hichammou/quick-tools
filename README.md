@@ -41,7 +41,7 @@ Built with modern technologies, the app provides quick access to tools like imag
 
 ```bash
 # Clone the repository
-git clone https://github.com/your-username/quicktools.git
+git clone https://github.com/hichammou/quick-tools.git
 cd quicktools
 
 # Install dependencies
