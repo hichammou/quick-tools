@@ -45,14 +45,14 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://yoursite.com/tools/image-converter",
+    url: "https://quick-tools-pban.vercel.app/tools/image-converter",
     title: "Image Converter - Convert PNG, JPG, WebP Online Free",
     description:
       "Free online image converter tool. Convert images between PNG, JPG, JPEG, and WebP formats instantly. Fast, secure, and easy to use.",
     siteName: "quick-tools",
     images: [
       {
-        url: "https://yoursite.com/images/image-converter-og.jpg",
+        url: "https://quick-tools-pban.vercel.app/images/image-converter-og.jpg",
         width: 1200,
         height: 630,
         alt: "Online Image Converter Tool - Convert PNG, JPG, WebP",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
   },
 
   alternates: {
-    canonical: "https://yoursite.com/tools/image-converter",
+    canonical: "https://quick-tools-pban.vercel.app/tools/image-converter",
   },
   other: {
     "application-name": "Image Converter Tool",
