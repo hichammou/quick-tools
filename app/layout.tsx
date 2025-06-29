@@ -2,6 +2,7 @@ import type React from "react";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -10,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "Collection of essential utilities for developers and creators. Image converter, Base64 encoder, UUID generator, and more.",
   keywords: "tools, utilities, converter, encoder, generator, developer tools",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
@@ -19,6 +23,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <Analytics />
       <body className={inter.className}>{children}</body>
     </html>
   );
