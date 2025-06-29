@@ -101,9 +101,15 @@ export default function HomePage() {
               Explore Tools
               <ArrowRightIcon className="ml-2 h-4 w-4" />
             </Button>
-            <Button size="lg" variant="outline">
-              View on GitHub
-            </Button>
+            <Link
+              href="https://github.com/hichammou/quick-tools.git"
+              target="_blank"
+              referrerPolicy="no-referrer"
+            >
+              <Button size="lg" variant="outline">
+                View on GitHub
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
