@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   description:
     "Collection of essential utilities for developers and creators. Image converter, Base64 encoder, UUID generator, and more.",
   keywords: "tools, utilities, converter, encoder, generator, developer tools",
+  icons: {
+    icon: "/logo.svg",
+  },
 };
 
 export default function RootLayout({
