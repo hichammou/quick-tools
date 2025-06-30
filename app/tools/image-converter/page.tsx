@@ -94,9 +94,8 @@ export default function ImageConverter() {
 
           <ImageConverterOutput />
         </div>
+        <ImageConverterCanvas />
       </ImageConverterProvider>
-
-      <ImageConverterCanvas />
     </ToolLayout>
   );
 }
