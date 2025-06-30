@@ -11,7 +11,7 @@ function JsonInput() {
       value={input}
       onChange={(e) => setInput(e.target.value)}
       rows={8}
-      className="font-mono text-sm"
+      className="font-mono text-sm max-h-72"
     />
   );
 }
