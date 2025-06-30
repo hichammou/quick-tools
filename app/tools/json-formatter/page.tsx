@@ -1,118 +1,115 @@
-"use client"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import ToolLayout from "@/components/tool-layout";
 
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Textarea } from "@/components/ui/textarea"
-import { CopyIcon, CheckIcon, XIcon } from "lucide-react"
-import ToolLayout from "@/components/tool-layout"
+import FormattedJsonOutput from "@/components/json-formatter/formatted-json-output";
+import JsonFormatterProvider from "@/components/json-formatter/context";
+import JsonActions from "@/components/json-formatter/json-actions";
+import JsonInput from "@/components/json-formatter/json-input";
+import JsonValidationMessage from "@/components/json-formatter/json-validation-message";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "JSON Formatter & Validator - Format, Validate & Minify JSON Online",
+  description:
+    "Free online JSON formatter, validator, and minifier tool. Format messy JSON, validate JSON syntax, minify JSON data, and beautify JSON strings instantly. Easy to use JSON parser.",
+  keywords: [
+    "json formatter",
+    "json validator",
+    "json minifier",
+    "json beautifier",
+    "format json",
+    "validate json",
+    "minify json",
+    "json parser",
+    "json viewer",
+    "json editor",
+    "online json formatter",
+    "json syntax checker",
+    "json pretty print",
+    "json lint",
+    "json tool",
+    "json converter",
+    "json organizer",
+    "json structure",
+  ],
+  authors: [{ name: "quick-tools" }],
+  creator: "quick-tools",
+  publisher: "quick-tools",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://quick-tools-pban.vercel.app/tools/json-formatter",
+    title: "JSON Formatter & Validator - Format, Validate & Minify JSON Online",
+    description:
+      "Free online JSON formatter, validator, and minifier tool. Format messy JSON, validate JSON syntax, and beautify JSON strings instantly.",
+    siteName: "quick-tools",
+    images: [
+      {
+        url: "https://quick-tools-pban.vercel.app/images/json-formatter-og.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Online JSON Formatter and Validator Tool",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "JSON Formatter & Validator - Format, Validate & Minify JSON Online",
+    description:
+      "Free online JSON formatter, validator, and minifier. Format messy JSON, validate syntax, and beautify JSON strings instantly.",
+    creator: "@yourtwitterhandle",
+    images: [
+      "https://quick-tools-pban.vercel.app/images/json-formatter-twitter.jpg",
+    ],
+  },
+  alternates: {
+    canonical: "https://quick-tools-pban.vercel.app/tools/json-formatter",
+  },
+  other: {
+    "application-name": "JSON Formatter Tool",
+    "mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-capable": "yes",
+    "apple-mobile-web-app-status-bar-style": "default",
+    "apple-mobile-web-app-title": "JSON Formatter",
+    "format-detection": "telephone=no",
+  },
+  category: "productivity",
+};
 
 export default function JSONFormatter() {
-  const [input, setInput] = useState("")
-  const [output, setOutput] = useState("")
-  const [isValid, setIsValid] = useState<boolean | null>(null)
-  const [error, setError] = useState("")
-
-  const formatJSON = () => {
-    try {
-      const parsed = JSON.parse(input)
-      const formatted = JSON.stringify(parsed, null, 2)
-      setOutput(formatted)
-      setIsValid(true)
-      setError("")
-    } catch (err) {
-      setIsValid(false)
-      setError(err instanceof Error ? err.message : "Invalid JSON")
-      setOutput("")
-    }
-  }
-
-  const minifyJSON = () => {
-    try {
-      const parsed = JSON.parse(input)
-      const minified = JSON.stringify(parsed)
-      setOutput(minified)
-      setIsValid(true)
-      setError("")
-    } catch (err) {
-      setIsValid(false)
-      setError(err instanceof Error ? err.message : "Invalid JSON")
-      setOutput("")
-    }
-  }
-
-  const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text)
-  }
-
-  const clearAll = () => {
-    setInput("")
-    setOutput("")
-    setIsValid(null)
-    setError("")
-  }
-
   return (
-    <ToolLayout title="JSON Formatter" description="Format, validate, and minify JSON data">
-      <div className="space-y-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Input JSON</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <Textarea
-              placeholder="Paste your JSON here..."
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              rows={8}
-              className="font-mono text-sm"
-            />
-
-            <div className="flex gap-2">
-              <Button onClick={formatJSON} disabled={!input.trim()}>
-                Format & Validate
-              </Button>
-              <Button onClick={minifyJSON} disabled={!input.trim()} variant="outline">
-                Minify
-              </Button>
-              <Button onClick={clearAll} variant="outline">
-                Clear
-              </Button>
-            </div>
-
-            {isValid !== null && (
-              <div
-                className={`flex items-center gap-2 p-3 rounded ${
-                  isValid ? "bg-green-50 text-green-700" : "bg-red-50 text-red-700"
-                }`}
-              >
-                {isValid ? <CheckIcon className="h-4 w-4" /> : <XIcon className="h-4 w-4" />}
-                <span className="text-sm font-medium">{isValid ? "Valid JSON" : "Invalid JSON"}</span>
-                {error && <span className="text-sm">: {error}</span>}
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {output && (
+    <ToolLayout
+      title="JSON Formatter"
+      description="Format, validate, and minify JSON data"
+    >
+      <JsonFormatterProvider>
+        <div className="space-y-6">
           <Card>
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle>Formatted JSON</CardTitle>
-              <Button size="sm" variant="outline" onClick={() => copyToClipboard(output)}>
-                <CopyIcon className="mr-2 h-4 w-4" />
-                Copy
-              </Button>
+            <CardHeader>
+              <CardTitle>Input JSON</CardTitle>
             </CardHeader>
-            <CardContent>
-              <div className="relative">
-                <pre className="bg-gray-50 p-4 rounded border overflow-auto max-h-96 text-sm">
-                  <code>{output}</code>
-                </pre>
-              </div>
+            <CardContent className="space-y-4">
+              <JsonInput />
+
+              <JsonActions />
+
+              <JsonValidationMessage />
             </CardContent>
           </Card>
-        )}
-      </div>
+          <FormattedJsonOutput />
+        </div>
+      </JsonFormatterProvider>
     </ToolLayout>
-  )
+  );
 }
