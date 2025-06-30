@@ -3,9 +3,9 @@
 import { useEffect, useRef, useState } from "react";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import { Button } from "./ui/button";
-import { copyToClipboard } from "@/lib/utils";
+import { cn, copyToClipboard } from "@/lib/utils";
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({ text, className }: { text: string; className?: string }) {
   const [copied, setCopied] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -30,7 +30,7 @@ function CopyButton({ text }: { text: string }) {
     <Button
       size="sm"
       variant="outline"
-      className="absolute top-2 right-2 bg-transparent"
+      className={cn("absolute top-2 right-2 bg-transparent", className)}
       disabled={copied}
       onClick={() => {
         copyToClipboard(text);
